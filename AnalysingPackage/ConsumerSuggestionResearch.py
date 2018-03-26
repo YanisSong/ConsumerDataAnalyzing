@@ -1,16 +1,20 @@
-from AnalysingPackage import QuestionerOfLandSpotAnalysation as QACall
+from DataTransfer import LandSpotStatisticsData as LSStatistics
 from xlwt import *
 
 
+global phoneCallData
+phoneCallData = {}
+global messageData
+messageData = {}
+global netWorkData
+netWorkData = {}
+
+
 def suggestionClean():
-    # suggesstionDict = QACall.suggesstionDict
-    suggesstionDict = QACall.dataProgramming()
-    global phoneCallData
-    phoneCallData = {}
-    global messageData
-    messageData = {}
-    global netWorkData
-    netWorkData = {}
+    suggesstionDict = LSStatistics.QuestionerOFLSDT()
+    phoneCallData.clear()
+    messageData.clear()
+    netWorkData.clear()
     for key, item in suggesstionDict.items():
         # Todo: Phone number is the key that may be used in the future function
         dataList = item.split("**")
@@ -18,6 +22,18 @@ def suggestionClean():
         processingMessage(dataList, messageData)
         processingNetWork(dataList, netWorkData)
     outputDataInExcel(phoneCallData, messageData, netWorkData)
+
+
+def suggesstionInfoFilter():
+    suggesstionDict = LSStatistics.QuestionerOFLSDT()
+    phoneCallData.clear()
+    messageData.clear()
+    netWorkData.clear()
+    for key, item in suggesstionDict.items():
+        dataList = item.split("**")
+        processingPhoneCall(dataList, phoneCallData)
+        processingMessage(dataList, messageData)
+        processingNetWork(dataList, netWorkData)
 
 
 def outputDataInExcel(phoneCallItems, messageItems, netWorkItems):
@@ -45,10 +61,16 @@ def outputDataInExcel(phoneCallItems, messageItems, netWorkItems):
     for x_track, value in enumerate(allData):
         for y_track, data in enumerate(value):
             table.write(x_track, y_track, data)
-    workSheet.save('景区调研.xls')
+    waitingFileName = input("Please input a suitable output Office_excel file's URL:")
+    fileURL = waitingFileName
+    if fileURL.endswith(".xlsx"):
+        fileURL.replace(".xlsx", ".xls")
+    if ".xls" not in fileURL:
+        fileURL += "_.xls"
+    workSheet.save(fileURL)
 
 
-def processingPhoneCall(dataList, phoneCallData):
+def processingPhoneCall(dataList, phoneCallDict):
     spotName = dataList[1].split(u':')
     phoneItem = dataList[2].split(u':')
     if len(spotName) < 2:
@@ -57,13 +79,13 @@ def processingPhoneCall(dataList, phoneCallData):
         return
     else:
         if not ("---" in phoneItem[1]):
-            if spotName[1] in phoneCallData:
-                phoneCallData[spotName[1]] += 1
+            if spotName[1] in phoneCallDict:
+                phoneCallDict[spotName[1]] += 1
             else:
-                phoneCallData[spotName[1]] = 1
+                phoneCallDict[spotName[1]] = 1
 
 
-def processingMessage(dataList, messageData):
+def processingMessage(dataList, messageDict):
     spotName = dataList[1].split(u':')
     messageItem = dataList[3].split(u':')
     if len(spotName) < 2:
@@ -72,13 +94,13 @@ def processingMessage(dataList, messageData):
         return
     else:
         if not ("---" in messageItem[1]):
-            if spotName[1] in messageData:
-                messageData[spotName[1]] += 1
+            if spotName[1] in messageDict:
+                messageDict[spotName[1]] += 1
             else:
-                messageData[spotName[1]] = 1
+                messageDict[spotName[1]] = 1
 
 
-def processingNetWork(dataList, netWorkData):
+def processingNetWork(dataList, netWorkDict):
     spotName = dataList[1].split(u':')
     netWorkItem = dataList[4].split(u':')
     if len(spotName) < 2:
@@ -87,11 +109,9 @@ def processingNetWork(dataList, netWorkData):
         return
     else:
         if not ("---" in netWorkItem[1]):
-            if spotName[1] in netWorkData:
-                netWorkData[spotName[1]] += 1
+            if spotName[1] in netWorkDict:
+                netWorkDict[spotName[1]] += 1
             else:
-                netWorkData[spotName[1]] = 1
+                netWorkDict[spotName[1]] = 1
 
-
-suggestionClean()
 

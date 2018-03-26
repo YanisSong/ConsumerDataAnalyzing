@@ -3,6 +3,9 @@ from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
+from DataTransfer import DataModifiedToExhibition as DataME
+from DataTransfer import LandSpotStatisticsData as LSStatistics
+from AnalysingPackage import QuestionerOfLandSpotAnalysation as QuestionLS
 
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
@@ -70,7 +73,14 @@ def DrawAnaGraph(Dts, Dtr):
     plt.show()
 
 
-# plt.xticks(rotation=90)
-# plt.savefig('123.pdf')
+def runnerProcess():
+    LSStatistics.QuestionerOFLSDT()
+    DataME.dataFromComputationToExhibition(QuestionLS.questionerStatistics, QuestionLS.questionerResultResearch)
+    DrawAnaGraph(DataME.Dts, DataME.Dtr)
+
+
+# runnerProcess()
+# plt.x_ticks(rotation=90)
+# plt.save_Graph('123.pdf')
 
 

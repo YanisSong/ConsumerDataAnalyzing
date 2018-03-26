@@ -1,5 +1,10 @@
 # import numpy as np
 # import matplotlib.pyplot as plt
-# import MroAnalysing as ehbCalling
+from AnalysingPackage import MroAnalysing as ehbCalling
 
-# ehbCalling.dataProgramming()
+
+def showDataInGraph():
+    ehbCalling.dataProgramming()
+    print("Graph under coding")
+
+

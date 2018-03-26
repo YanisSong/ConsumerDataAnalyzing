@@ -28,7 +28,6 @@ def dataProgramming():
     fr.close()
 
 
-# Data cleaning function.
 def processingLine(value, outputUrl):
     involvingNumber = re.findall(r"\d{11}", value)
     if not involvingNumber:
@@ -58,3 +57,10 @@ def iii(i):
 
 iii(x)
 print(len(x))
+
+
+# a = "sdfasdfsd"
+# if ".xls" not in a:
+#     a += ".xls"
+# print(a)
+

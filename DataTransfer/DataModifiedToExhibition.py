@@ -1,9 +1,10 @@
-from ExhibitionPackage import ExhibitionOFLSQues as MoEx
+global Dts
+Dts = {}
+global Dtr
+Dtr = {}
 
 
 def dataFromComputationToExhibition(statistics, result):
-    Dts = statistics
-    Dtr = result
-    MoEx.DrawAnaGraph(Dts, Dtr)
-
+    Dts.update(statistics)
+    Dtr.update(result)
 

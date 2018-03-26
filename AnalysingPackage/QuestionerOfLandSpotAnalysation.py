@@ -1,13 +1,9 @@
 # This module is used to analysing the questioner that is collected from the land spots.
 import re
-from DataTransfer import DataModifiedToExhibition as DtMo
 
 
 # data input and output interface.
-# Todo: Modifying the function use the input file URLs.
-def dataProgramming():
-    filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
-    outputUrl = "D:\workDir\客服部调查问卷分析报告\landspotResult.txt"
+def dataProgramming(fileURL):
     countingDict = {}
     unSatisfiedItems = {}
     suggesstionDick = {}
@@ -15,24 +11,40 @@ def dataProgramming():
     totalCustomer = []
     uselessConsumer = []
     # Todo: Add userDict in the future, which is used to analysing user information.
-    fr = open(filename, encoding='gb18030', errors='ignore')
+    fr = open(fileURL, encoding='gb18030', errors='ignore')
     for line in fr:
-        reason = processingLine(line, outputUrl)
+        reason = processingLine(line)
         if reason:
             analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, uselessConsumer,
                              distributeConsumerDict, unSatisfiedItems)
     fr.close()
-    statistics = statisticsProcess(totalCustomer, uselessConsumer, countingDict, distributeConsumerDict)
-    resultResearch = unSatisfiedItemsResearch(countingDict, unSatisfiedItems)
+    global questionerStatistics
+    questionerStatistics = statisticsProcess(totalCustomer, uselessConsumer, countingDict, distributeConsumerDict)
+    global questionerResultResearch
+    questionerResultResearch = unSatisfiedItemsResearch(countingDict, unSatisfiedItems)
     # Todo: Check this module when the function completed.
     global meaningfulCollection
     meaningfulCollection = countingDict.copy()
-    DtMo.dataFromComputationToExhibition(statistics, resultResearch)
     return suggesstionDick
 
 
+def dataSaving(fileURL):
+    destinyPath = input("Please input output file's URL:")
+    outputURL = destinyPath
+    fr = open(fileURL, encoding='gb18030', errors='ignore')
+    for line in fr:
+        valueList = processingLine(line)
+        if valueList:
+            valueItems = ''.join(valueList)
+        else:
+            continue
+        with open(outputURL, "a") as destiny:
+            destiny.write(valueItems)
+    fr.close()
+
+
 # Data cleaning function.
-def processingLine(value, outputUrl):
+def processingLine(value):
     involvingNumber = re.findall(r"\d{11}", value)
     if not involvingNumber:
         return
@@ -45,9 +57,6 @@ def processingLine(value, outputUrl):
         if valueSet[markSet[i] - 1] == "":
             valueSet[markSet[i] - 1] = "---"
         valueList.append(valueSet[markSet[i] - 1])
-    reasonItem = ''.join(valueList)
-    with open(outputUrl, "a") as destiny:
-        destiny.write(reasonItem)
     return valueList
 
 
@@ -117,7 +126,6 @@ def statisticsProcess(total, useless, countingDict, distributeConsumerDict):
     return statistics
 
 
-# Todo: Check this module when the function completed.
 # global suggesstionDict
 # suggesstionDict = dataProgramming()
 

@@ -3,16 +3,15 @@ import re
 
 
 # data input and output interface.
-# Todo: Modifying the function use the input file URLs.
-def priceProgramming():
-    filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
-    outputUrl = "D:\workDir\客服部调查问卷分析报告\landspotResult.txt"
+def priceProgramming(filename):
+    # filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
+    # waitingFileName = input("Please input candidate file's URL:")
+    # filename = waitingFileName
     countingDict = {}
     distributeConsumerDict = {}
-    # Todo: Add userDict in the future, which is used to analysing user information.
     fr = open(filename, encoding='gb18030', errors='ignore')
     for line in fr:
-        reason = processingLine(line, outputUrl)
+        reason = processingLine(line)
         if reason:
             analysingPrice(reason, countingDict, distributeConsumerDict)
     fr.close()
@@ -20,15 +19,15 @@ def priceProgramming():
     return priceStatistics
 
 
-def serviceProgramming():
-    filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
-    outputUrl = "D:\workDir\客服部调查问卷分析报告\landspotResult.txt"
+def serviceProgramming(filename):
+    # filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
+    # waitingFileName = input("Please input candidate file's URL:")
+    # filename = waitingFileName
     countingDict = {}
     distributeConsumerDict = {}
-    # Todo: Add userDict in the future, which is used to analysing user information.
     fr = open(filename, encoding='gb18030', errors='ignore')
     for line in fr:
-        reason = processingLine(line, outputUrl)
+        reason = processingLine(line)
         if reason:
             analysingServices(reason, countingDict, distributeConsumerDict)
     fr.close()
@@ -36,8 +35,24 @@ def serviceProgramming():
     return servicesStatistics
 
 
+def savingDataInFile(fileName):
+    destinyPath = input("Please input output TXT file's URL:")
+    outputUrl = destinyPath
+    if ".txt" not in outputUrl:
+        outputUrl += "_.txt"
+    fr = open(fileName, encoding='gb18030', errors='ignore')
+    for line in fr:
+        reason = processingLine(line)
+        if reason:
+            reasonItems = ''.join(reason)
+            with open(outputUrl, "a") as destiny:
+                destiny.write(reasonItems + "\n")
+            destiny.close()
+    fr.close()
+
+
 # Data cleaning function.
-def processingLine(value, outputUrl):
+def processingLine(value):
     involvingNumber = re.findall(r"\d{11}", value)
     if not involvingNumber:
         return
@@ -50,9 +65,6 @@ def processingLine(value, outputUrl):
         if valueSet[markSet[i] - 1] == "":
             return
         valueList.append(valueSet[markSet[i] - 1])
-    reasonItem = ''.join(valueList)
-    with open(outputUrl, "a") as destiny:
-        destiny.write(reasonItem)
     return valueList
 
 
