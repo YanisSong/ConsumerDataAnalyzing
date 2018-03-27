@@ -13,10 +13,18 @@ from xlutils.copy import copy
 # plt.show()
 
 
-# f = "123safsfasfasf"
+# f = "123"
 # price = re.findall(r"\d{2,3}", f)
 # print(int(price[0]))
+#
+# for i in range(10):
+#     print(i)
 
-for i in range(10):
-    print(i)
+
+# p = input("1111111111111111111")
+# if p == '':
+#     print("22222")
+# else:
+#     print("33333")
+
 
