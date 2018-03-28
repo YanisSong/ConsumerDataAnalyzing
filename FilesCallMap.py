@@ -1,4 +1,4 @@
-from AnalysingPackage import MroAnalysing as callMro
+from AnalysingPackage.AnalyzingMroInformation import MroAnalysing as callMro
 from DataTransfer import LandSpotStatisticsData as LSData
 from AnalysingPackage import ConsumerSuggestionResearch as AlyCS
 

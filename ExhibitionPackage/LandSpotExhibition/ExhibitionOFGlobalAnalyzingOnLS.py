@@ -81,7 +81,7 @@ def showPieChartOfDistinctSpot(percentageList, landSpot, keyword1, keyword2, key
     plt.axes(aspect=1)  # set this , Figure is round, otherwise it is an ellipse
     explode_setting = [0.1, 0.1, 0.1, 0.1]
     plt.title(landSpot + "调研情况", fontsize=9, bbox={'facecolor': '0.8', 'pad': 5},
-              horizontalalignment='left', verticalalignment='top', rotation='vertical')
+              horizontalalignment='left', verticalalignment='top')
     plt.pie(x=percentageList, explode=explode_setting, labels=labels, autopct='%3.1f %%',
             labeldistance=1.1, startangle=90, pctdistance=0.6, shadow=True)
     plt.legend(loc='upper left', bbox_to_anchor=(-0.3, 1.1))

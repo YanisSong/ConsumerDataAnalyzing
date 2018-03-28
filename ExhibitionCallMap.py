@@ -1,10 +1,8 @@
 import re
-from ExhibitionPackage import ExhibitionOFMro as EbMro
-from ExhibitionPackage import ExhibitionOFLSQues as EbQuLS
-from ExhibitionPackage import ExhibitionOFLSFee as EbQuLSFee
-from ExhibitionPackage import ExhibitionOFLSService as EbQuLSService
+from ExhibitionPackage.MroExhibition import ExhibitionOFMro as EbMro
 from ExhibitionPackage import ExhibitionOFLSSuggesstionPie as EbQuLSItemsPie
-from ExhibitionPackage import ExhibitionOfGlobalAnalyzationOnLS as EbQuLSPhoUserPie
+from ExhibitionPackage.LandSpotExhibition import ExhibitionOfGlobalAnalyzationOnLS as EbQuLSPhoUserPie, \
+    ExhibitionOFLSService as EbQuLSService, ExhibitionOFLSFee as EbQuLSFee, ExhibitionOFLSQues as EbQuLS
 
 
 def callExhibitionMro():

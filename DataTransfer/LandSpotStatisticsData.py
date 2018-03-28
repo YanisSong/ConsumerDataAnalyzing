@@ -1,5 +1,5 @@
-from AnalysingPackage import QuestionerOfLandSpotAnalysation as DTinterface
-from AnalysingPackage import QuestionerOfLandSpotAnalysatoinOnItems as DTFinterface
+from AnalysingPackage.AnalyzingLandSpotQuestioner import QuestionerOfLandSpotAnalysation as DTinterface, \
+    QuestionerOfLandSpotAnalysatoinOnItems as DTFinterface
 
 
 def QuestionerOFLSDT():

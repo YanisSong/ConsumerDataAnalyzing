@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 from DataTransfer import DataModifiedToExhibition as DataME
 from DataTransfer import LandSpotStatisticsData as LSStatistics
-from AnalysingPackage import QuestionerOfLandSpotAnalysation as QuestionLS
-
+from AnalysingPackage.AnalyzingLandSpotQuestioner import QuestionerOfLandSpotAnalysation as QuestionLS
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 

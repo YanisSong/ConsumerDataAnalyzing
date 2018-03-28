@@ -58,9 +58,3 @@ def iii(i):
 iii(x)
 print(len(x))
 
-
-# a = "sdfasdfsd"
-# if ".xls" not in a:
-#     a += ".xls"
-# print(a)
-
