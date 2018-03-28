@@ -1,7 +1,7 @@
 import re
 from ExhibitionPackage.MroExhibition import ExhibitionOFMro as EbMro
 from ExhibitionPackage import ExhibitionOFLSSuggesstionPie as EbQuLSItemsPie
-from ExhibitionPackage.LandSpotExhibition import ExhibitionOfGlobalAnalyzationOnLS as EbQuLSPhoUserPie, \
+from ExhibitionPackage.LandSpotExhibition import ExhibitionOFGlobalAnalyzingOnLS as EbQuLSPhoUserPie, \
     ExhibitionOFLSService as EbQuLSService, ExhibitionOFLSFee as EbQuLSFee, ExhibitionOFLSQues as EbQuLS
 
 
