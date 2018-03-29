@@ -24,7 +24,7 @@ def LinesInfo():
         else:
             midValue += linesInfo[index]
             indexList.append(singleIndex)
-            item = (midValue,linesInfo[index])
+            item = (midValue, linesInfo[index])
             dataList.append(item)
             midValue = 0
             boolValue = 1
@@ -78,7 +78,7 @@ def graphShow():
     ax = plt.subplot(212)
     ax.yaxis.set_major_locator(yMajorLocator)
     ax.yaxis.set_minor_locator(yMinorLocator)
-    plt.bar(index_x, valueList, width=barWidth, tick_label=names, label='线路信息', fc='g')
+    plt.bar(index_x, valueList, width=barWidth, tick_label=names, label='线路信息')
     plt.legend(loc='lower center', bbox_to_anchor=(0.8, 1.01), fancybox=True, ncol=5)
     # Dividing the whole graph into two parts. This graph locates in the second line.
     percentageSeries = countingForPieShow(newLinesSeries)
@@ -102,7 +102,6 @@ def graphShow():
     plt.title(indexes[1])
     plt.pie(x=percentageList2, explode=explode_setting, autopct='%3.1f %%',
             labeldistance=1.1, startangle=90, pctdistance=0.6, shadow=True)
-    plt.legend(loc='upper left', bbox_to_anchor=(-0.3, 1.1))
 
     plt.subplot(233)
     percentageList3 = [percentages[2], 1 - percentages[2]]
@@ -110,7 +109,6 @@ def graphShow():
     plt.title(indexes[2])
     plt.pie(x=percentageList3, explode=explode_setting, autopct='%3.1f %%',
             labeldistance=1.1, startangle=90, pctdistance=0.6, shadow=True)
-    plt.legend(loc='upper left', bbox_to_anchor=(-0.3, 1.1))
 
     plt.show()
 

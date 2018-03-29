@@ -3,6 +3,10 @@ from ExhibitionPackage.MroExhibition import ExhibitionOFMro as EbMro
 from ExhibitionPackage import ExhibitionOFLSSuggesstionPie as EbQuLSItemsPie
 from ExhibitionPackage.LandSpotExhibition import ExhibitionOFGlobalAnalyzingOnLS as EbQuLSPhoUserPie, \
     ExhibitionOFLSService as EbQuLSService, ExhibitionOFLSFee as EbQuLSFee, ExhibitionOFLSQues as EbQuLS
+from ExhibitionPackage.HighWayExhibition import ExhibitionOnLines as ELin
+from ExhibitionPackage.HighWayExhibition import ExhibitionOnLocationInfo as ELLocation
+from ExhibitionPackage.HighWayExhibition import ExhibitionOnLinesServices as ELServices
+
 
 
 def callExhibitionMro():
@@ -56,6 +60,18 @@ def callSingleLSItemsPercentage():
     print("Searching exit.")
 
 
+def callExhibitionOnLocation():
+    ELLocation.locationInfoPie()
+
+
+def callExhibitionOnLines():
+    ELin.graphShow()
+
+
+def callExhibitionOnLineServices():
+    ELServices.showServicesAlyLineChart()
+
+
 # callSingleLSItemsPercentage()
-totalPhoneUserSuggesstionExhibition()
+# totalPhoneUserSuggesstionExhibition()
 

@@ -1,6 +1,7 @@
 from AnalysingPackage.AnalyzingMroInformation import MroAnalysing as callMro
 from DataTransfer import LandSpotStatisticsData as LSData
 from AnalysingPackage import ConsumerSuggestionResearch as AlyCS
+from AnalysingPackage.AnalyzingHighWayInfomation import HighWayQuestionerProcessor as HWPro
 
 
 def callMroAlys():
@@ -32,9 +33,18 @@ def callLandSpotAlysOnServices():
     LSData.QuestionerOFLSSDTSave()
 
 
+def callHighWayDataAly():
+    HWPro.cleanedData
+    savingPath = input("Please input output file's URL:")
+    if '.xls' not in savingPath and '.xlsx' not in savingPath:
+        savingPath += '_.xls'
+    HWPro.dataSaving(savingPath)
+
+
 # def callQuesAly():
 def userRequest():
     # TODO: LIKE FOLLOWS.
     print("Get user request here. ")
 
 
+callHighWayDataAly()

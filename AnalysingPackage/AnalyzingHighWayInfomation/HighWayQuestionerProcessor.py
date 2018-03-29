@@ -12,7 +12,9 @@ def dataCleaning():
     for i in range(1, 39):
         names.append('item' + str(i))
     # file = open(r'D:\workDir\客服部调查问卷分析报告\云南高铁网络质量调查情况-有效样本清单.xlsx', 'rb')
-    dataF = pd.read_excel(r'D:\workDir\客服部调查问卷分析报告\云南高铁.xlsx', 'Sheet1', skiprows=[0], names=names)
+    waitingFileName = input("Please input candidate file's URL:")
+    fileURL = waitingFileName
+    dataF = pd.read_excel(fileURL, 'Sheet1', skiprows=[0], names=names)
     dataF = dataF.dropna(subset=['item7'])
     dataFFilter = dataF[(True ^ dataF['item7'].isin(['其他，请您补充']))]
     # Delete the useless columns from the DataFrame.
@@ -72,8 +74,8 @@ def dataCleaning():
 cleanedData = dataCleaning()
 
 
-def dataSaving():
-    cleanedData.to_excel(r'D:\workDir\客服部调查问卷分析报告\云南高铁_Clean.xls', sheet_name='cleanData')
+def dataSaving(savingPath):
+    cleanedData.to_excel(savingPath, sheet_name='cleanData')
 
 
 def locationCounting():
@@ -84,7 +86,14 @@ def locationCounting():
 
 
 def meanOFLines():
-    # grouped = cleanedData['评分权重'].groupby(cleanedData['线路'])
     groupMean = cleanedData['评分权重'].groupby([cleanedData['线路'], cleanedData['跨省(Y/N)']]).mean()
     return groupMean
+
+
+def dataAlyGroupByService():
+    dataFiltering = cleanedData[cleanedData.评分权重 > 20]
+    totalNum = cleanedData.size
+    highScoreNum = dataFiltering.size
+    groupCounting = dataFiltering['评分权重'].groupby(dataFiltering['套餐类型']).size()  # type: pd.Series
+    return groupCounting, totalNum, highScoreNum
 
